@@ -2,7 +2,7 @@ REPORT_DIR := report
 BUILD_DIR := build
 REPORT_BUILD_DIR := ../$(BUILD_DIR)
 MAIN := main.tex
-PDF_NAME := CRA - Additive Manufacturing Threat Taxonomy.pdf
+PDF_NAME := CRA-Additive-Manufacturing-Threat-Taxonomy.pdf
 
 .PHONY: all report watch clean
 
