@@ -157,6 +157,13 @@ This document defines a \textbf{merged threat taxonomy for additive manufacturin
 \item \textbf{Kumar et al. (2025)}, \emph{Security of cyber-physical Additive Manufacturing supply chain: Survey, attack taxonomy and solutions}
 \end{enumerate}
 
+The CRA/ATT\&CK mitigation-alignment rationale is additionally informed by:
+
+\begin{enumerate}
+\setcounter{enumi}{2}
+\item \textbf{Ruohonen et al. (2025)}, \emph{An Alignment Between the CRA's Essential Requirements and the ATT\&CK's Mitigations}
+\end{enumerate}
+
 The merged taxonomy is designed to be:
 
 \begin{itemize}
@@ -217,6 +224,22 @@ This taxonomy is especially strong on:
 \end{itemize}
 
 
+\section{Ruohonen et al. (2025)}
+
+
+Ruohonen et al. evaluate the alignment between the Cyber Resilience Act's essential cybersecurity requirements and MITRE ATT\&CK mitigations.
+
+In this document, Ruohonen et al. is used as a \textbf{supporting CRA/ATT\&CK alignment source}. It is not used as an AM threat-taxonomy source, and it does not replace MITRE ATT\&CK as the source for mitigation names, IDs, or catalog descriptions.
+
+This source is especially useful for:
+
+\begin{itemize}
+\item supporting the conceptual link between CRA essential requirements and ATT\&CK mitigation categories
+\item identifying where ATT\&CK mitigations align well or poorly with CRA requirements
+\item reinforcing that ATT\&CK mitigations can support CRA-oriented security analysis at a conceptual level, while not proving product-specific compliance
+\end{itemize}
+
+
 \chapter{Merge decision}
 
 
@@ -229,6 +252,8 @@ The merged taxonomy uses \textbf{Kumar's high-level shape} as the umbrella struc
 \end{enumerate}
 
 Within that umbrella, \textbf{Yampolskiy's detailed AM-specific categories} are used to deepen and refine the target and method branches.
+
+Ruohonen et al. is not merged into the AM taxonomy structure. It is used only to support the CRA/ATT\&CK alignment rationale behind the mitigation and regulatory crosswalks.
 
 This means:
 
@@ -262,6 +287,16 @@ The mitigation mappings below are a \textbf{derived analytical crosswalk} from t
 The mappings aim to be exhaustive at the level of \textbf{materially relevant ATT\&CK mitigations} for each AM attack method. They intentionally do not repeat every ATT\&CK mitigation under every method where the connection would be merely generic or weak.
 
 The mapping uses MITRE ATT\&CK \textbf{Enterprise} and \textbf{Industrial Control Systems (ICS)} mitigations as the primary catalogs because AM environments combine enterprise IT, engineering workstations, production networks, cyber-physical equipment, and industrial safety constraints. The MITRE pages checked for this version identify ATT\&CK v19 as current. MITRE ATT\&CK \textbf{Mobile} mitigations are not repeated under every method; they should be added only when the AM product or workflow includes a mobile app, mobile device management surface, or mobile-controlled production interface.
+
+The source hierarchy for mitigation entries is: MITRE ATT\&CK provides the mitigation names, IDs, and catalog descriptions; Ruohonen et al. (2025) supports the broader rationale for aligning ATT\&CK mitigations with CRA essential requirements; this document derives the AM-specific method-level mapping.
+
+The CRA connection is specific rather than generic. Article 13 makes the Annex I cybersecurity requirements operative for products with digital elements, while Annex I Part I defines product-security properties and Annex I Part II defines vulnerability-handling requirements. In this document, ATT\&CK mitigations are used as a traceability layer between concrete AM attack methods and CRA-relevant control areas:
+
+\begin{itemize}
+\item theft of CAD files, process data, recipes, or machine-resident know-how maps most directly to \texttt{Annex I.I(2)(d)} on unauthorised access, \texttt{Annex I.I(2)(e)} on confidentiality, and \texttt{Annex I.I(2)(l)} on monitoring, with ATT\&CK mitigations such as access management, authentication, encryption, data loss prevention, and audit logging
+\item CAD, STL, AMF, 3MF, tool-path, G-code, recipe, sensor, or configuration tampering maps most directly to \texttt{Annex I.I(2)(f)} on integrity of data, commands, programs, and configuration, supported by \texttt{Annex I.I(2)(j)} on attack-surface limitation and \texttt{Annex I.I(2)(k)} on exploitation mitigation, with ATT\&CK mitigations such as code signing, communication authenticity, software process and device authentication, input validation, boot integrity, and execution prevention
+\item compromise of AM equipment, firmware, slicers, cloud design platforms, remote services, update channels, or third-party dependencies maps to \texttt{Annex I.I(2)(a)-(c)}, \texttt{Annex I.I(2)(j)-(l)}, and \texttt{Annex I.II(1)-(8)}, with ATT\&CK mitigations such as supply chain management, vulnerability scanning, update software, secure update paths, boot integrity, audit logging, data backup, and network segmentation
+\end{itemize}
 
 Each method-level mitigation block follows this logic:
 
@@ -4881,7 +4916,11 @@ Each concrete attack method carries a derived MITRE ATT\&CK mitigation block:
 \item \textbf{Residual coverage note:} where ATT\&CK is incomplete or only indirectly useful, especially for physical, material, logistics, legal, or emergency-context risks
 \end{itemize}
 
-The short version is: \textbf{goals explain why, targets explain where, methods explain how, and the MITRE mapping explains what defensive control families are relevant.}
+The mitigation mapping is a CRA-oriented traceability layer, not a claim of product compliance. It links AM attack methods to ATT\&CK mitigation families and then to CRA control areas such as \texttt{Annex I.I(2)(d)} unauthorised-access protection, \texttt{Annex I.I(2)(e)} confidentiality, \texttt{Annex I.I(2)(f)} integrity of data, commands, programs, and configuration, \texttt{Annex I.I(2)(j)} attack-surface limitation, \texttt{Annex I.I(2)(k)} exploitation mitigation, \texttt{Annex I.I(2)(l)} monitoring, and \texttt{Annex I.II(1)-(8)} vulnerability handling.
+
+For the AM digital thread, this means the mapping is strongest for slicer software, printer firmware, machine-control interfaces, build-job transfer, cloud design platforms, update channels, design repositories, sensor streams, and quality records. It is weaker for purely physical, material, contractual, export-control, or logistics issues, which still require AM-specific assurance such as process qualification, geometry comparison, material testing, inspection, supplier audits, and chain-of-custody controls.
+
+The short version is: \textbf{goals explain why, targets explain where, methods explain how, the MITRE mapping explains what defensive control families are relevant, and the CRA crosswalk explains which regulatory requirement those control families support.}
 
 
 \section{CRA mapping}
@@ -5029,6 +5068,7 @@ Example:
 \begin{itemize}
 \item Yampolskiy, M., King, W. E., Gatlin, J., Belikovetsky, S., Brown, A., Skjellum, A., \& Elovici, Y. (2018). \emph{Security of additive manufacturing: Attack taxonomy and survey}. Additive Manufacturing, 21, 431-457.
 \item Kumar, M., Epiphaniou, G., \& Maple, C. (2025). \emph{Security of cyber-physical Additive Manufacturing supply chain: Survey, attack taxonomy and solutions}. Computers \& Security, 157, 104557.
+\item Ruohonen, J., Kang, E.-Y., \& Ramadan, Q. (2025). \emph{An Alignment Between the CRA's Essential Requirements and the ATT\&CK's Mitigations}. In 2025 IEEE 33rd International Requirements Engineering Conference Workshops (REW) (pp. 209-214). IEEE. \url{https://doi.org/10.1109/REW66121.2025.00033}.
 \item MITRE. (2026). \emph{MITRE ATT\&CK Enterprise Mitigations}. ATT\&CK v19. Accessed 2026-05-01. \url{https://attack.mitre.org/mitigations/enterprise/}
 \item MITRE. (2026). \emph{MITRE ATT\&CK Industrial Control Systems (ICS) Mitigations}. ATT\&CK v19. Accessed 2026-05-01. \url{https://attack.mitre.org/mitigations/ics/}
 \item MITRE. (2026). \emph{MITRE ATT\&CK Mobile Mitigations}. ATT\&CK v19. Accessed 2026-05-01. \url{https://attack.mitre.org/mitigations/mobile/}
@@ -5040,6 +5080,7 @@ Source-use notes:
 \begin{itemize}
 \item The AM taxonomy structure itself is still derived from Yampolskiy and Kumar.
 \item The MITRE ATT\&CK entries are used only for the method-level mitigation crosswalk.
+\item Ruohonen et al. is used as supporting literature for the CRA/ATT\&CK alignment rationale, not as the source for AM taxonomy nodes or MITRE mitigation identifiers.
 \item The CRA entries are used only for the regulatory-requirements crosswalk and are based on the attached Regulation (EU) 2024/2847 text.
 \item Enterprise and Industrial Control Systems (ICS) mitigations are used as the primary catalogs because AM combines conventional IT, engineering workstations, production equipment, industrial networks, and cyber-physical control surfaces.
 \item Mobile mitigations are referenced for completeness but are not mapped into every method. They should be applied only where the concrete AM product or workflow includes a mobile app, mobile device, or mobile-controlled production interface.
